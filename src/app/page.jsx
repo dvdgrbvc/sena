@@ -19,8 +19,9 @@ const i18n = {
       ctaPrimary: "Get Tickets",
       ctaSecondary: "Listen on Spotify"
     },
-    milestone: {
-      line: "Teni Tenime reached over <span class='text-yellow-300'>100.000.000</span> Streams on Spotify"
+     milestone: {
+      line:
+        "<span class='text-white'>Teni Tenime</span> and <span class='text-white'>Sevmemeliyiz</span> each surpassed <span class='text-yellow-300'>100.000.000</span> streams on Spotify"
     },
     music: { title: "Music", subtitle: "Stream the latest releases and artist picks." },
     videos: { title: "Videos", subtitle: "Highlights from YouTube." },
@@ -44,8 +45,9 @@ const i18n = {
       ctaPrimary: "Bilet Al",
       ctaSecondary: "Spotify'da Dinle"
     },
-    milestone: {
-      line: "Teni Tenime, Spotify'da <span class='text-yellow-300'>100.000.000</span> dinlenmeyi geçti"
+     milestone: {
+      line:
+        "Teni Tenime ve <span class='text-white'>Sevmemeliyiz</span> single'ları Spotify'da <span class='text-yellow-300'>100.000.000</span> dinlenmeyi geçti"
     },
     music: { title: "Müzik", subtitle: "En yeni parçalar ve sanatçı seçimleri." },
     videos: { title: "Videolar", subtitle: "YouTube'dan öne çıkanlar." },
@@ -143,30 +145,42 @@ function Hero({ lang }) {
       <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_50%,rgba(168,85,247,0.18),rgba(0,0,0,0))]" />
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 text-center">
-        <motion.h1
+        {/* LOGO statt Text */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-5xl md:text-7xl font-extrabold tracking-tight text-white drop-shadow-2xl"
+          className="flex justify-center"
         >
-          {t.titleTop} <span className="text-purple-400">{t.titleBottom}</span>
-        </motion.h1>
+          <img
+            src="/sena_logo.png"
+            alt="Sena Şener Logo"
+             className="mx-auto w-72 md:w-96 lg:w-[28rem] h-auto" 
+            loading="lazy"
+          />
+        </motion.div>
+
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-4 text-base md:text-lg text-zinc-200 max-w-2xl mx-auto"
+          className="mt-6 text-lg md:text-xl text-zinc-200 max-w-2xl mx-auto font-light tracking-wide"
         >
           {t.subtitle}
         </motion.p>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="mt-8 flex items-center justify-center gap-3"
+          className="mt-10 flex items-center justify-center gap-4"
         >
-          <Button href="#tour">{t.ctaPrimary}</Button>
-          <Button href="#music" variant="ghost">{t.ctaSecondary}</Button>
+          <Button href="#tour" size="lg" className="px-8 py-3 text-base font-semibold shadow-lg shadow-purple-500/30">
+            {t.ctaPrimary}
+          </Button>
+          <Button href="#music" variant="ghost" size="lg" className="px-8 py-3 text-base">
+            {t.ctaSecondary}
+          </Button>
         </motion.div>
       </div>
 
@@ -207,37 +221,113 @@ function MilestoneCelebration({ lang }) {
   const [showConfetti, setShowConfetti] = useState(true)
   useEffect(() => {
     if (prefersReducedMotion) return setShowConfetti(false)
-    const t = setTimeout(() => setShowConfetti(false), 6000)
+    const t = setTimeout(() => setShowConfetti(false), 5500)
     return () => clearTimeout(t)
   }, [prefersReducedMotion])
 
-  return (
-    <section
-      className="relative flex items-center justify-center text-center py-20 md:py-24 px-6 bg-gradient-to-r from-purple-700 via-purple-600 to-purple-700 text-white overflow-hidden"
-      aria-label="Milestone celebration"
-    >
-      {showConfetti && !prefersReducedMotion && dims.width > 0 && (
-        <Confetti width={dims.width} height={dims.height} numberOfPieces={420} recycle={false} gravity={0.25} />
-      )}
+  const pieces = Math.min(600, Math.max(180, Math.floor(dims.width * 0.4)))
 
-      <div className="pointer-events-none absolute inset-0 opacity-20">
-        <div className="absolute -inset-[20%] rounded-full blur-3xl bg-white/10" />
+  const SPOTIFY_TENI = "https://open.spotify.com/embed/track/6lN8zGW83p9Ee4TJWedanB?utm_source=generator&theme=0"
+  const SPOTIFY_BENI = "https://open.spotify.com/embed/track/7sNgPpXH3mDpC12yRUqEtz?utm_source=generator&theme=0"
+
+  return (
+    <section className="relative overflow-hidden" aria-label="Milestone celebration">
+      {/* Animated Aurora Background */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#3b0764] via-[#6d28d9] to-[#4c1d95]" />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_80%_at_70%_20%,rgba(255,255,255,0.18),rgba(0,0,0,0)_60%)]" />
+        <motion.div
+          className="absolute -top-1/3 -left-1/4 h-[120vmin] w-[120vmin] rounded-full blur-3xl"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(168,85,247,0.35), rgba(168,85,247,0) 60%)",
+          }}
+          animate={{ x: ["0%", "10%", "-5%", "0%"], y: ["0%", "6%", "-4%", "0%"] }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute -bottom-1/3 -right-1/4 h-[120vmin] w-[120vmin] rounded-full blur-3xl"
+          style={{
+            background:
+              "radial-gradient(closest-side, rgba(139,92,246,0.28), rgba(139,92,246,0) 60%)",
+          }}
+          animate={{ x: ["0%", "-8%", "6%", "0%"], y: ["0%", "-5%", "7%", "0%"] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <div
+          className="absolute inset-0 opacity-[0.08] mix-blend-overlay"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/40 to-transparent" />
       </div>
 
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.7 }}
-        className="text-3xl md:text-5xl font-extrabold tracking-tight drop-shadow-sm max-w-4xl"
-      >
-        <span
-          dangerouslySetInnerHTML={{ __html: text }}
+      {/* Confetti */}
+      {showConfetti && !prefersReducedMotion && dims.width > 0 && (
+        <Confetti
+          width={dims.width}
+          height={dims.height}
+          numberOfPieces={pieces}
+          recycle={false}
+          gravity={0.25}
         />
-      </motion.h2>
+      )}
+
+      {/* Content */}
+      <div className="relative mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24 text-center text-white">
+        {/* Header text (edit freely later) */}
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-3xl md:text-5xl font-extrabold leading-tight tracking-tight mb-10"
+        >
+          <span
+            className="bg-gradient-to-r from-white via-white to-white/70 bg-clip-text text-transparent"
+            dangerouslySetInnerHTML={{ __html: text }}
+          />
+        </motion.h2>
+
+        {/* Two Spotify tracks side by side */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 place-items-center"
+        >
+          <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur p-3 md:p-4 w-full">
+            <iframe
+              title="Teni Tenime — Spotify"
+              style={{ borderRadius: 12 }}
+              src={SPOTIFY_TENI}
+              width="100%"
+              height="352"
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            />
+          </div>
+
+          <div className="rounded-2xl border border-white/15 bg-white/10 backdrop-blur p-3 md:p-4 w-full">
+            <iframe
+              title="Beni Bırakma — Spotify"
+              style={{ borderRadius: 12 }}
+              src={SPOTIFY_BENI}
+              width="100%"
+              height="352"
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+            />
+          </div>
+        </motion.div>
+      </div>
     </section>
   )
 }
-
 /* =======================
    Spotify + Videos (no milestone aside)
 ======================= */
@@ -315,6 +405,14 @@ function SpotifyArtistEmbed({ uri }) {
 function YouTubeGallery({ videos }) {
   const [index, setIndex] = useState(0)
 
+  // --- Tweakables
+  const CENTER_WIDTH = '72%';   // how wide the middle video is
+  const SIDE_WIDTH   = '36%';   // how wide each side preview is
+  const OVERLAP_PX   = 28;      // how far the center overlaps the sides
+  const SIDE_SCALE   = 0.94;    // scale of side previews (relative to center)
+  const SIDE_OPACITY = 0.9;     // opacity of side previews
+
+  // --- helpers (unchanged)
   const parseYouTube = (url) => {
     try {
       const u = new URL(url)
@@ -328,7 +426,9 @@ function YouTubeGallery({ videos }) {
           /(\d+)/.exec(String(t))
         if (sec) {
           const [, h, m, s] = sec
-          start = h || m || s ? (parseInt(h || '0') * 3600 + parseInt(m || '0') * 60 + parseInt(s || '0')) : parseInt(sec[0], 10)
+          start = h || m || s
+            ? (parseInt(h || '0') * 3600 + parseInt(m || '0') * 60 + parseInt(s || '0'))
+            : parseInt(sec[0], 10)
         }
       }
       return { id, start }
@@ -343,6 +443,7 @@ function YouTubeGallery({ videos }) {
   const next = () => go(index + 1)
   const prev = () => go(index - 1)
 
+  // swipe
   const startX = useRef(0)
   const onTouchStart = (e) => { startX.current = e.touches[0].clientX }
   const onTouchEnd = (e) => {
@@ -351,67 +452,127 @@ function YouTubeGallery({ videos }) {
   }
 
   if (!total) return null
+
   const active = items[index]
+  const leftItem = items[(index - 1 + total) % total]
+  const rightItem = items[(index + 1) % total]
 
   return (
-    <div className="group relative rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent overflow-hidden">
+    <section className="group relative rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent overflow-hidden">
+      {/* Stage */}
       <div className="relative aspect-video" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-        <iframe
-          key={`${active.id}-${active.start}`}
-          className="h-full w-full"
-          src={`https://www.youtube.com/embed/${active.id}?rel=0&start=${active.start}`}
-          title={active.label || 'YouTube video'}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
+        {/* Left preview (behind) */}
+        <SidePreview
+          side="left"
+          item={leftItem}
+          onClick={prev}
+          style={{
+            width: SIDE_WIDTH,
+            transform: `translateY(-50%) translateX(${OVERLAP_PX}px) scale(${SIDE_SCALE})`,
+            opacity: SIDE_OPACITY,
+            zIndex: 5
+          }}
         />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent" />
-        <div className="absolute inset-0 flex items-center justify-between px-2">
-          <button
-            aria-label="Previous"
-            onClick={prev}
-            className="opacity-0 group-hover:opacity-100 transition bg-black/50 hover:bg-black/70 border border-white/10 rounded-full h-10 w-10 grid place-items-center text-white"
-          >‹</button>
-          <button
-            aria-label="Next"
-            onClick={next}
-            className="opacity-0 group-hover:opacity-100 transition bg-black/50 hover:bg-black/70 border border-white/10 rounded-full h-10 w-10 grid place-items-center text-white"
-          >›</button>
-        </div>
-      </div>
 
-      <div className="flex gap-3 overflow-x-auto p-4">
-        {items.map((it, i) => (
-          <button
-            key={it.id}
-            onClick={() => setIndex(i)}
-            className={cx(
-              'relative shrink-0 rounded-xl border overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/60',
-              i === index ? 'border-purple-500 ring-2 ring-purple-500/40' : 'border-white/10'
-            )}
-            style={{ width: 200 }}
-            aria-label={`Play ${it.label || 'video'} ${i + 1}`}
+        {/* Right preview (behind) */}
+        <SidePreview
+          side="right"
+          item={rightItem}
+          onClick={next}
+          style={{
+            width: SIDE_WIDTH,
+            transform: `translateY(-50%) translateX(-${OVERLAP_PX}px) scale(${SIDE_SCALE})`,
+            opacity: SIDE_OPACITY,
+            zIndex: 5
+          }}
+        />
+
+        {/* Center (slightly larger, on top) */}
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.98 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            className="rounded-2xl overflow-hidden border border-white/10 shadow-2xl shadow-black/50 pointer-events-auto"
+            style={{ width: CENTER_WIDTH, aspectRatio: '16 / 9', zIndex: 10 }}
           >
-            <img
-              src={`https://img.youtube.com/vi/${it.id}/hqdefault.jpg`}
-              alt={it.label || 'thumbnail'}
-              className="h-28 w-50 object-cover"
-              loading="lazy"
+            <iframe
+              key={`${active.id}-${active.start}`}
+              className="h-full w-full"
+              src={`https://www.youtube.com/embed/${active.id}?rel=0&start=${active.start}`}
+              title={active.label || 'YouTube video'}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
             />
-            <div className="absolute inset-0 bg-black/20" />
-            {it.label && <span className="absolute left-2 bottom-2 text-xs text-white/90 drop-shadow">{it.label}</span>}
-          </button>
-        ))}
+          </motion.div>
+        </div>
+
+        {/* gradient bottom */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/70 to-transparent z-20" />
+
+        {/* arrows */}
+        <button
+          aria-label="Previous"
+          onClick={prev}
+          className="absolute left-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition bg-black/50 hover:bg-black/70 border border-white/10 rounded-full h-10 w-10 grid place-items-center text-white z-30"
+        >‹</button>
+        <button
+          aria-label="Next"
+          onClick={next}
+          className="absolute right-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition bg-black/50 hover:bg-black/70 border border-white/10 rounded-full h-10 w-10 grid place-items-center text-white z-30"
+        >›</button>
       </div>
 
-      <div className="flex items-center justify-center gap-1 pb-4">
+      {/* dots */}
+      <div className="flex items-center justify-center gap-1 pb-4 pt-3">
         {items.map((_, i) => (
-          <span key={i} className={cx('h-1.5 w-4 rounded-full', i === index ? 'bg-purple-500' : 'bg-white/20')} />
+          <button
+            key={i}
+            aria-label={`Go to ${i + 1}`}
+            onClick={() => setIndex(i)}
+            className={`h-1.5 w-4 rounded-full ${i === index ? 'bg-purple-500' : 'bg-white/20'}`}
+          />
         ))}
       </div>
-    </div>
+    </section>
   )
 }
 
+function SidePreview({ side = 'left', item, onClick, style }) {
+  if (!item) return null
+  const align = side === 'left' ? 'left-2 md:left-4' : 'right-2 md:right-4'
+
+  return (
+    <motion.button
+      onClick={onClick}
+      aria-label={side === 'left' ? 'Previous video' : 'Next video'}
+      className={`hidden sm:block absolute ${align} top-1/2 -translate-y-1/2 [transform:translateZ(0)]`}
+      initial={{ opacity: 0.0, scale: 0.92 }}
+      animate={{ opacity: 1, scale: 1 }}
+      whileHover={{ scale: 0.97 }}
+      transition={{ duration: 0.25 }}
+      style={style}
+    >
+      <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-xl shadow-black/40">
+        <img
+          src={`https://img.youtube.com/vi/${item.id}/hqdefault.jpg`}
+          alt={item.label || 'thumbnail'}
+          className="h-full w-full object-cover"
+          loading="lazy"
+          style={{ filter: 'brightness(0.9)' }}
+        />
+        {/* overlay and soft edge toward center */}
+        <div className="absolute inset-0 bg-black/30" />
+        <div className={`absolute inset-y-0 ${side === 'left' ? 'right-0' : 'left-0'} w-16 ${side === 'left' ? 'bg-gradient-to-l' : 'bg-gradient-to-r'} from-transparent to-black/80`} />
+        {item.label && (
+          <div className={`absolute ${side === 'left' ? 'left-3' : 'right-3'} bottom-3 text-xs text-white/90 drop-shadow`}>
+            {item.label}
+          </div>
+        )}
+      </div>
+    </motion.button>
+  )
+}
 /* =======================
    Tour Section (localized)
 ======================= */
@@ -582,6 +743,26 @@ function Footer() {
 }
 
 /* =======================
+   Image Stripe Divider
+======================= */
+function ImageStripe() {
+  return (
+    <section aria-label="Image divider" className="relative">
+      <div className="relative h-70 md:h-96 w-screen left-1/2 -translate-x-1/2 overflow-hidden">
+        <img
+          src="/sena-divider.jpg"
+          alt="Sena Şener"
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover object-[center_80%]"
+        />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-20 bg-gradient-to-b from-black/60 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/60 to-transparent" />
+      </div>
+    </section>
+  )
+}
+
+/* =======================
    Page
 ======================= */
 export default function Page() {
@@ -598,6 +779,8 @@ export default function Page() {
       <Nav lang={lang} setLang={setLang} />
       <Hero lang={lang} />
       <MilestoneCelebration lang={lang} />
+
+      <ImageStripe src="/sena-divider.jpg" alt="Sena performing live" heightClass="h-20 md:h-36" />
       <SpotifySection lang={lang} />
       <TourSection lang={lang} />
       <SocialSection lang={lang} />
