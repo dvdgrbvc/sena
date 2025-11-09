@@ -8,8 +8,15 @@ import { i18n } from '../app/i18n'
 export default function SpotifySection({ lang }) {
   const t = i18n[lang]
   return (
-    <section id="music" className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24">
-      <SectionHeader title={t.music.title} id="music-header" subtitle={t.music.subtitle} />
+    <section
+      id="music"
+      className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24"
+    >
+      <SectionHeader
+        title={t.music.title}
+        id="music-header"
+        subtitle={t.music.subtitle}
+      />
 
       <div className="grid gap-6 md:grid-cols-2">
         <SpotifyArtistEmbed />
@@ -18,11 +25,38 @@ export default function SpotifySection({ lang }) {
 
       <div id="videos" className="mt-14">
         <SectionHeader title={t.videos.title} subtitle={t.videos.subtitle} />
+
+        {/* YouTube promo image (below header, centered, not full width) */}
+        <a
+          href="https://www.youtube.com/c/Sena%C5%9Eenermusic"
+          target="_blank"
+          rel="noopener"
+          aria-label="Open Sena Şener YouTube channel"
+          className="block mt-6"
+        >
+          <img
+            src="/sena-youtube.png"
+            alt="Sena Şener — Watch on YouTube"
+            loading="lazy"
+            className="mx-auto w-full max-w-4xl rounded-2xl border border-white/10 shadow-2xl shadow-black/40"
+            style={{ display: 'block' }}
+          />
+        </a>
+
         <YouTubeGallery
           videos={[
-            { url: 'https://youtu.be/tBcizD1Hsls?si=i2P35TOSUx5elopp&t=5', label: 'Teni Tenem (Live)' },
-            { url: 'https://youtu.be/iOz-oLU2ZZY?si=1cCuUZ94FqOxtl4g', label: 'Official Video' },
-            { url: 'https://youtu.be/R8chfFb9NO0?si=ZMHDqb_Jy4hqpE1N', label: 'Performance' },
+            {
+              url: 'https://youtu.be/tBcizD1Hsls?si=i2P35TOSUx5elopp&t=5',
+              label: 'Teni Tenem (Live)',
+            },
+            {
+              url: 'https://youtu.be/iOz-oLU2ZZY?si=1cCuUZ94FqOxtl4g',
+              label: 'Official Video',
+            },
+            {
+              url: 'https://youtu.be/R8chfFb9NO0?si=ZMHDqb_Jy4hqpE1N',
+              label: 'Performance',
+            },
           ]}
         />
       </div>
@@ -54,7 +88,12 @@ function AppleMusicEmbed() {
         allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
         frameBorder="0"
         height="450"
-        style={{ width: '100%', maxWidth: '660px', overflow: 'hidden', borderRadius: 10 }}
+        style={{
+          width: '100%',
+          maxWidth: '660px',
+          overflow: 'hidden',
+          borderRadius: 10,
+        }}
         sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
         src="https://embed.music.apple.com/de/playlist/sena-%C5%9Fener-essentials/pl.3c2051b0a5c24924a95460b65bed8ea9"
         title="Apple Music — Sena Şener Essentials"
@@ -87,7 +126,9 @@ function YouTubeGallery({ videos }) {
         if (sec) {
           const [, h, m, s] = sec
           start = h || m || s
-            ? (parseInt(h || '0') * 3600 + parseInt(m || '0') * 60 + parseInt(s || '0'))
+            ? parseInt(h || '0') * 3600 +
+              parseInt(m || '0') * 60 +
+              parseInt(s || '0')
             : parseInt(sec[0], 10)
         }
       }
@@ -104,10 +145,14 @@ function YouTubeGallery({ videos }) {
   const prev = () => go(index - 1)
 
   const startX = useRef(0)
-  const onTouchStart = (e) => { startX.current = e.touches[0].clientX }
+  const onTouchStart = (e) => {
+    startX.current = e.touches[0].clientX
+  }
   const onTouchEnd = (e) => {
     const dx = e.changedTouches[0].clientX - startX.current
-    if (Math.abs(dx) > 40) { dx < 0 ? next() : prev() }
+    if (Math.abs(dx) > 40) {
+      dx < 0 ? next() : prev()
+    }
   }
 
   if (!total) return null
@@ -117,8 +162,12 @@ function YouTubeGallery({ videos }) {
   const rightItem = items[(index + 1) % total]
 
   return (
-    <section className="group relative rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent overflow-hidden">
-      <div className="relative aspect-video" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+    <section className="group relative rounded-3xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent overflow-hidden mt-10">
+      <div
+        className="relative aspect-video"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         <SidePreview
           side="left"
           item={leftItem}
@@ -127,7 +176,7 @@ function YouTubeGallery({ videos }) {
             width: SIDE_WIDTH,
             transform: `translateY(-50%) translateX(${OVERLAP_PX}px) scale(${SIDE_SCALE})`,
             opacity: SIDE_OPACITY,
-            zIndex: 5
+            zIndex: 5,
           }}
         />
 
@@ -139,7 +188,7 @@ function YouTubeGallery({ videos }) {
             width: SIDE_WIDTH,
             transform: `translateY(-50%) translateX(-${OVERLAP_PX}px) scale(${SIDE_SCALE})`,
             opacity: SIDE_OPACITY,
-            zIndex: 5
+            zIndex: 5,
           }}
         />
 
@@ -168,12 +217,16 @@ function YouTubeGallery({ videos }) {
           aria-label="Previous"
           onClick={prev}
           className="absolute left-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition bg-black/50 hover:bg-black/70 border border-white/10 rounded-full h-10 w-10 grid place-items-center text-white z-30"
-        >‹</button>
+        >
+          ‹
+        </button>
         <button
           aria-label="Next"
           onClick={next}
           className="absolute right-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition bg-black/50 hover:bg-black/70 border border-white/10 rounded-full h-10 w-10 grid place-items-center text-white z-30"
-        >›</button>
+        >
+          ›
+        </button>
       </div>
 
       <div className="flex items-center justify-center gap-1 pb-4 pt-3">
@@ -182,7 +235,9 @@ function YouTubeGallery({ videos }) {
             key={i}
             aria-label={`Go to ${i + 1}`}
             onClick={() => setIndex(i)}
-            className={`h-1.5 w-4 rounded-full ${i === index ? 'bg-purple-500' : 'bg-white/20'}`}
+            className={`h-1.5 w-4 rounded-full ${
+              i === index ? 'bg-purple-500' : 'bg-white/20'
+            }`}
           />
         ))}
       </div>
@@ -214,9 +269,19 @@ function SidePreview({ side = 'left', item, onClick, style }) {
           style={{ filter: 'brightness(0.9)' }}
         />
         <div className="absolute inset-0 bg-black/30" />
-        <div className={`absolute inset-y-0 ${side === 'left' ? 'right-0' : 'left-0'} w-16 ${side === 'left' ? 'bg-gradient-to-l' : 'bg-gradient-to-r'} from-transparent to-black/80`} />
+        <div
+          className={`absolute inset-y-0 ${
+            side === 'left' ? 'right-0' : 'left-0'
+          } w-16 ${
+            side === 'left' ? 'bg-gradient-to-l' : 'bg-gradient-to-r'
+          } from-transparent to-black/80`}
+        />
         {item.label && (
-          <div className={`absolute ${side === 'left' ? 'left-3' : 'right-3'} bottom-3 text-xs text-white/90 drop-shadow`}>
+          <div
+            className={`absolute ${
+              side === 'left' ? 'left-3' : 'right-3'
+            } bottom-3 text-xs text-white/90 drop-shadow`}
+          >
             {item.label}
           </div>
         )}
