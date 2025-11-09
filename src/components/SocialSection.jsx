@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import SectionHeader from './SectionHeader'
 import { i18n } from '../app/i18n'
 
+
 function TikTokCreator({ uniqueId = 'sena.sener', profileUrl = 'https://www.tiktok.com/@sena.sener' }) {
   useEffect(() => {
     const id = 'tiktok-embed-script'
@@ -17,7 +18,7 @@ function TikTokCreator({ uniqueId = 'sena.sener', profileUrl = 'https://www.tikt
   }, [])
 
   return (
-    <div className="relative rounded-2xl border border-white/10 bg-white/5 p-4 flex items-center justify-center h-[600px]">
+    <div className="relative flex items-center justify-center h-[600px]">
       <blockquote
         className="tiktok-embed"
         cite={profileUrl}
@@ -56,7 +57,7 @@ function InstagramProfileEmbed({ profileUrl = 'https://www.instagram.com/sena.se
   }, [])
 
   return (
-    <div className="relative rounded-2xl border border-white/10 bg-white/5 p-4 flex items-start justify-center h-[600px]">
+    <div className="relative flex items-start justify-center h-[600px]">
       <blockquote
         className="instagram-media"
         data-instgrm-permalink={profileUrl}

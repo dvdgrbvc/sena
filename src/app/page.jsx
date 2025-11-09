@@ -12,6 +12,7 @@ import SocialSection from '../components/SocialSection'
 import ContactSection from '../components/ContactSection'
 import Footer from '../components/Footer'
 import ImageStripe from '../components/ImageStripe'
+import StreamSection from '../components/StreamSection'
 
 export default function Page() {
   const [lang, setLang] = useState('en')
@@ -27,8 +28,8 @@ export default function Page() {
       <Nav lang={lang} setLang={setLang} />
       <Hero lang={lang} />
       <MilestoneCelebration lang={lang} />
-
       <ImageStripe />
+      <StreamSection />
       <SpotifySection lang={lang} />
       <TourSection lang={lang} />
       <SocialSection lang={lang} />

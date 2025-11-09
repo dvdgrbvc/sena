@@ -2,7 +2,7 @@
 
 export const i18n = {
   en: {
-    nav: { home: "Home", music: "Music", videos: "Videos", tour: "Tour / Tickets", social: "Social", contact: "Contact", toggle: "TR" },
+    nav: { home: "Home", music: "Music", videos: "Videos", tour: "Tickets", social: "Social", contact: "Contact", toggle: "TR" },
     hero: {
       titleTop: "SENA",
       titleBottom: "ŞENER",
@@ -28,7 +28,7 @@ export const i18n = {
     }
   },
   tr: {
-    nav: { home: "Ana Sayfa", music: "Müzik", videos: "Videolar", tour: "Turne / Biletler", social: "Sosyal", contact: "İletişim", toggle: "EN" },
+    nav: { home: "Ana Sayfa", music: "Müzik", videos: "Videolar", tour: "Biletler", social: "Sosyal", contact: "İletişim", toggle: "EN" },
     hero: {
       titleTop: "SENA",
       titleBottom: "ŞENER",
