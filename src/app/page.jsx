@@ -136,7 +136,7 @@ function Hero({ lang }) {
       {/* Background video */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
-        src="/sena-hero.mp4"
+        src="/sena-hero2.mp4"
         autoPlay
         playsInline
         muted
