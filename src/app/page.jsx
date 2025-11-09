@@ -127,10 +127,13 @@ function Nav({ lang, setLang }) {
 /* =======================
    HERO with video + motion
 ======================= */
+
 function Hero({ lang }) {
   const t = i18n[lang].hero
+
   return (
     <section id="home" className="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
+      {/* Background video */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src="/sena-hero.mp4"
@@ -144,31 +147,61 @@ function Hero({ lang }) {
       <div className="absolute inset-0 bg-black/50" />
       <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_50%,rgba(168,85,247,0.18),rgba(0,0,0,0))]" />
 
+      {/* Center content */}
       <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 text-center">
-        {/* LOGO statt Text */}
+        {/* WORDMARK */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="flex justify-center"
         >
-          <img
-            src="/sena_logo.png"
-            alt="Sena Şener Logo"
-             className="mx-auto w-72 md:w-96 lg:w-[28rem] h-auto" 
-            loading="lazy"
-          />
+          <div className="relative inline-block">
+            <motion.h1
+              initial={{ letterSpacing: '0.05em' }}
+              animate={{ letterSpacing: '0.08em' }}
+              transition={{ duration: 1.2, ease: 'easeOut' }}
+              className="
+                font-extrabold uppercase leading-none tracking-[0.08em]
+                text-white mix-blend-difference
+                drop-shadow-[0_6px_24px_rgba(0,0,0,0.45)]
+                text-[14vw] md:text-[10vw] lg:text-[9vw]
+              "
+              style={{
+                WebkitTextStroke: '1px rgba(255,255,255,0.22)',
+              }}
+            >
+              SENA ŞENER
+            </motion.h1>
+
+            {/* Shine animation */}
+            <motion.span
+              aria-hidden
+              className="pointer-events-none absolute inset-0"
+              style={{
+                background:
+                  'linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.65) 50%, rgba(255,255,255,0) 100%)',
+                WebkitMaskImage: 'linear-gradient(#000,#000)',
+                mixBlendMode: 'difference',
+              }}
+              initial={{ backgroundPosition: '-200% 0%', backgroundSize: '200% 100%', opacity: 0.35 }}
+              animate={{ backgroundPosition: ['-200% 0%', '200% 0%'], opacity: [0.2, 0.4, 0.2] }}
+              transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          </div>
         </motion.div>
 
+        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-6 text-lg md:text-xl text-zinc-200 max-w-2xl mx-auto font-light tracking-wide"
+          className="mt-8 text-lg md:text-xl text-zinc-200 max-w-2xl mx-auto font-light tracking-wide"
         >
           {t.subtitle}
         </motion.p>
 
+        {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -184,7 +217,7 @@ function Hero({ lang }) {
         </motion.div>
       </div>
 
-      {/* floating orbs */}
+      {/* Floating lights */}
       <motion.div
         className="pointer-events-none absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-purple-500/20 blur-3xl"
         animate={{ y: [0, -10, 0], opacity: [0.5, 0.8, 0.5] }}
@@ -196,6 +229,7 @@ function Hero({ lang }) {
         transition={{ duration: 7, repeat: Infinity }}
       />
 
+      {/* Gradient fade bottom */}
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </section>
   )
@@ -337,9 +371,10 @@ function SpotifySection({ lang }) {
     <section id="music" className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24">
       <SectionHeader title={t.music.title} id="music-header" subtitle={t.music.subtitle} />
 
-      <div className="grid gap-6">
-        <SpotifyArtistEmbed uri="spotify:artist:7CW2eGwAuElNq09rVtZYsM" />
-      </div>
+<div className="grid gap-6 md:grid-cols-2">
+  <SpotifyArtistEmbed uri="spotify:artist:7CW2eGwAuElNq09rVtZYsM" />
+  <AppleMusicEmbed url="https://music.apple.com/de/artist/sena-%C5%9Fener/992280338" />
+</div>
 
       <div id="videos" className="mt-14">
         <SectionHeader title={t.videos.title} subtitle={t.videos.subtitle} />
@@ -355,52 +390,40 @@ function SpotifySection({ lang }) {
   )
 }
 
-function SpotifyArtistEmbed({ uri }) {
-  const embedRef = useRef(null)
-  const controllerRef = useRef(null)
-  const [apiReady, setApiReady] = useState(false)
-  const [playerLoaded, setPlayerLoaded] = useState(false)
-
-  useEffect(() => {
-    const id = 'spotify-iframe-sdk'
-    if (!document.getElementById(id)) {
-      const script = document.createElement('script')
-      script.id = id
-      script.src = 'https://open.spotify.com/embed/iframe-api/v1'
-      script.async = true
-      document.body.appendChild(script)
-    }
-    window.onSpotifyIframeApiReady = (SpotifyIframeApi) => {
-      window.__SpotifyIframeApi = SpotifyIframeApi
-      setApiReady(true)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!apiReady || playerLoaded || !embedRef.current) return
-    const API = window.__SpotifyIframeApi
-    if (!API) return
-    API.createController(
-      embedRef.current,
-      { width: '100%', height: '352', uri },
-      (controller) => {
-        controller.addListener('ready', () => setPlayerLoaded(true))
-        controllerRef.current = controller
-      }
-    )
-  }, [apiReady, playerLoaded, uri])
-
+function SpotifyArtistEmbed() {
   return (
     <div className="rounded-2xl overflow-hidden border border-white/10 bg-black">
-      <div ref={embedRef} />
-      {!playerLoaded && <p className="p-4 text-sm text-zinc-400">Loading player…</p>}
-      <div className="p-3 flex gap-2">
-        <Button onClick={() => controllerRef.current?.play()}>Play</Button>
-        <Button variant="ghost" onClick={() => controllerRef.current?.pause()}>Pause</Button>
-      </div>
+      <iframe
+        style={{ borderRadius: 12 }}
+        src="https://open.spotify.com/embed/artist/7CW2eGwAuElNq09rVtZYsM?utm_source=generator&theme=0"
+        width="100%"
+        height="450"
+        frameBorder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        loading="lazy"
+        title="Spotify — Sena Şener"
+      />
     </div>
   )
 }
+
+function AppleMusicEmbed() {
+  return (
+    <div className="rounded-2xl overflow-hidden border border-white/10 bg-black">
+      <iframe
+        allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+        frameBorder="0"
+        height="450"
+        style={{ width: '100%', maxWidth: '660px', overflow: 'hidden', borderRadius: 10 }}
+        sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+        src="https://embed.music.apple.com/de/playlist/sena-%C5%9Fener-essentials/pl.3c2051b0a5c24924a95460b65bed8ea9"
+        title="Apple Music — Sena Şener Essentials"
+        loading="lazy"
+      />
+    </div>
+  )
+}
+
 
 function YouTubeGallery({ videos }) {
   const [index, setIndex] = useState(0)
@@ -667,15 +690,21 @@ function TikTokCreator({ uniqueId = 'sena.sener', profileUrl = 'https://www.tikt
       document.body.appendChild(s)
     }
   }, [])
+
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+    <div className="relative rounded-2xl border border-white/10 bg-white/5 p-4 flex items-center justify-center h-[600px]">
       <blockquote
         className="tiktok-embed"
         cite={profileUrl}
         data-unique-id={uniqueId}
         data-embed-from="embed_page"
         data-embed-type="creator"
-        style={{ maxWidth: '780px', minWidth: '288px' }}
+        style={{
+          maxWidth: '100%',
+          minWidth: '280px',
+          width: '100%',
+          height: '100%',
+        }}
       >
         <section>
           <a target="_blank" rel="noreferrer" href={`${profileUrl}?refer=creator_embed`}>
@@ -687,12 +716,51 @@ function TikTokCreator({ uniqueId = 'sena.sener', profileUrl = 'https://www.tikt
   )
 }
 
+function InstagramProfileEmbed({ profileUrl = 'https://www.instagram.com/sena.sener/' }) {
+  useEffect(() => {
+    const id = 'instagram-embed-script'
+    if (!document.getElementById(id)) {
+      const s = document.createElement('script')
+      s.id = id
+      s.async = true
+      s.src = 'https://www.instagram.com/embed.js'
+      document.body.appendChild(s)
+    } else if (window.instgrm?.Embeds) {
+      window.instgrm.Embeds.process()
+    }
+  }, [])
+
+  return (
+    <div className="relative rounded-2xl border border-white/10 bg-white/5 p-4 flex items-start justify-center h-[600px]">
+      <blockquote
+        className="instagram-media"
+        data-instgrm-permalink={profileUrl}
+        data-instgrm-version="14"
+        style={{
+          background: '#FFF',
+          border: 0,
+          borderRadius: 12,
+          boxShadow: '0 0 1px 0 rgba(0,0,0,0.5), 0 8px 24px 0 rgba(0,0,0,0.15)',
+          margin: '0 auto',
+          maxWidth: '100%',
+          minWidth: 326,
+          width: '100%',
+          height: '84%',
+        }}
+      />
+    </div>
+  )
+}
+
 function SocialSection({ lang }) {
   const t = i18n[lang].social
   return (
     <section id="social" className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24">
       <SectionHeader title={t.title} subtitle={t.subtitle} />
-      <TikTokCreator />
+      <div className="grid gap-6 md:grid-cols-2">
+        <InstagramProfileEmbed profileUrl="https://www.instagram.com/sena.sener/" />
+        <TikTokCreator uniqueId="sena.sener" profileUrl="https://www.tiktok.com/@sena.sener" />
+      </div>
     </section>
   )
 }
@@ -703,30 +771,92 @@ function SocialSection({ lang }) {
 function ContactSection({ lang }) {
   const t = i18n[lang].contact
   return (
-    <section id="contact" className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24">
-      <SectionHeader title={t.title} id="contact-header" subtitle={t.subtitle} />
+    <section
+      id="contact"
+      className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24"
+    >
+      <SectionHeader
+        title={t.title}
+        id="contact-header"
+        subtitle={t.subtitle}
+      />
 
-      <div className="grid md:grid-cols-2 gap-6">
-        {/* Aslı Eren */}
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-7">
-          <h3 className="text-white font-semibold text-lg">{t.collabTitle}</h3>
-          <p className="text-zinc-300 mt-2">{t.collabLine}</p>
-          <div className="mt-4 space-y-1 text-purple-300">
-            <a className="block hover:underline" href="mailto:management@senasener.com">management@senasener.com</a>
-            <a className="block hover:underline" href="tel:+905547388339">+90 554 738 8339</a>
+      {/* FULL-WIDTH CARD */}
+      <article
+        className="relative overflow-hidden rounded-3xl border border-white/10
+                   bg-gradient-to-br from-white/[.06] to-white/[.03]
+                   p-6 md:p-10"
+        aria-label="Professional contact card"
+      >
+        {/* spiral background image */}
+       <div
+  className="absolute inset-0 pointer-events-none"
+  style={{
+    backgroundImage: "url('/spirale.png')",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "right 1.5rem top 1.5rem", // top-right corner
+    backgroundSize: "30%", // you can tweak this for scale (e.g. 150–220px)
+    opacity: 0.1,
+    mixBlendMode: "lighten",
+  }}
+/>
+
+        <div className="grid grid-cols-1 md:grid-cols-[auto,1fr,auto] items-start gap-6 md:gap-10 relative">
+          {/* Avatar */}
+          <div className="shrink-0">
+            <img
+              src="/asli-eren.jpg"
+              alt="Aslı Eren"
+              className="h-24 w-24 md:h-28 md:w-28 rounded-2xl object-cover border border-white/10 shadow-lg"
+              loading="lazy"
+            />
+          </div>
+
+          {/* Text */}
+          <div>
+            <h3 className="text-white font-semibold text-xl md:text-2xl">
+              Aslı Eren — Brands & Media
+            </h3>
+            <p className="text-zinc-300 mt-1">Manager</p>
+
+            <p className="text-zinc-300 mt-3 leading-relaxed">
+              For inquiries regarding collaborations, bookings, media appearances,
+              interviews, sponsorships, partnerships or press requests for{' '}
+              <span className="text-white font-medium">Sena Şener</span>.
+            </p>
+
+            {/* Contacts */}
+            <div className="mt-4 grid gap-1 text-purple-300">
+              <a
+                className="hover:underline break-all"
+                href="mailto:management@senasener.com"
+              >
+                management@senasener.com
+              </a>
+              <a className="hover:underline" href="tel:+905547388339">
+                +90 554 738 83 39
+              </a>
+            </div>
+          </div>
+
+          {/* Buttons (compact, aligned top-right) */}
+          <div className="flex gap-2 self-start">
+            <Button
+              href="mailto:management@senasener.com"
+              ariaLabel="Email Aslı Eren"
+            >
+              Email
+            </Button>
+            <Button
+              variant="ghost"
+              href="tel:+905547388339"
+              ariaLabel="Call Aslı Eren"
+            >
+              Call
+            </Button>
           </div>
         </div>
-
-        {/* Müge Sözen */}
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-6 md:p-7">
-          <h3 className="text-white font-semibold text-lg">{t.bookingTitle}</h3>
-          <p className="text-zinc-300 mt-2">{t.bookingLine}</p>
-          <div className="mt-4 space-y-1 text-purple-300">
-            <a className="block hover:underline" href="mailto:haluklevent@mugesozen.com.tr">haluklevent@mugesozen.com.tr</a>
-            <a className="block hover:underline" href="tel:+905326655776">+90 532 665 5776</a>
-          </div>
-        </div>
-      </div>
+      </article>
     </section>
   )
 }
