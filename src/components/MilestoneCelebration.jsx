@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import Confetti from 'react-confetti'
-import { i18n } from '../i18n'
+import { i18n } from '../app/i18n'
 
 export default function MilestoneCelebration({ lang }) {
   const prefersReducedMotion = useReducedMotion()

@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import SectionHeader from './SectionHeader'
-import { i18n } from '../i18n'
+import { i18n } from '../app/i18n'
 
 function TikTokCreator({ uniqueId = 'sena.sener', profileUrl = 'https://www.tiktok.com/@sena.sener' }) {
   useEffect(() => {

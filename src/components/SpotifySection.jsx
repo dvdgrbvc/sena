@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import SectionHeader from './SectionHeader'
-import { i18n } from '../i18n'
+import { i18n } from '../app/i18n'
 
 export default function SpotifySection({ lang }) {
   const t = i18n[lang]

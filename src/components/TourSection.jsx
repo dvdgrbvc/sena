@@ -2,8 +2,8 @@
 
 import SectionHeader from './SectionHeader'
 import Button from './Button'
-import { i18n } from '../i18n'
-import { cx } from '../lib/utils'
+import { i18n } from '../app/i18n'
+import { cn } from '../lib/utils'
 
 export default function TourSection({ lang }) {
   const t = i18n[lang].tour
@@ -35,7 +35,7 @@ export default function TourSection({ lang }) {
       onsale:  { text: t.onsale,  cls: 'border-purple-400/40 bg-purple-500/10 text-purple-300' },
     }
     const m = map[status] || map.onsale
-    return <span className={cx('text-[11px] uppercase tracking-wide rounded-full border px-2 py-1', m.cls)}>{m.text}</span>
+    return <span className={cn('text-[11px] uppercase tracking-wide rounded-full border px-2 py-1', m.cls)}>{m.text}</span>
   }
 
   return (

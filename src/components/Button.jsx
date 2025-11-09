@@ -1,6 +1,6 @@
 // app/components/Button.jsx
 
-import { cx } from '../lib/utils'
+import { cn } from '../lib/utils'
 
 export default function Button({
   href,
@@ -19,7 +19,7 @@ export default function Button({
       ? 'bg-purple-600 hover:bg-purple-500 text-white shadow-lg shadow-purple-600/30 disabled:opacity-50 disabled:cursor-not-allowed'
       : 'bg-transparent text-white/80 hover:text-white border border-white/15 hover:border-white/30 backdrop-blur disabled:opacity-50 disabled:cursor-not-allowed'
 
-  const cls = cx(base, styles, className)
+  const cls = cn(base, styles, className)
 
   if (href) {
     return (

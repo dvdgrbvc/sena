@@ -1,7 +1,7 @@
 // app/components/Nav.jsx
 
 import { useEffect, useState } from 'react'
-import { i18n } from '../i18n'
+import { i18n } from '../app/i18n'
 
 export default function Nav({ lang, setLang }) {
   const [scrolled, setScrolled] = useState(false)
