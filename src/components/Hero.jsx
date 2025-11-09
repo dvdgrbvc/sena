@@ -26,45 +26,55 @@ export default function Hero({ lang }) {
       <div className="absolute inset-0 bg-black/50" />
       <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_50%,rgba(168,85,247,0.18),rgba(0,0,0,0))]" />
 
-      {/* Center content */}
-      <div className="relative z-10 mx-auto max-w-6xl px-4 md:px-6 text-center">
-        {/* LOGO ohne Shine-Effekt */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex justify-center"
-        >
-          <motion.img
-            src="/sena-logo2.png"
-            alt="Sena Şener"
-            className="
-              max-w-[80vw]
-              md:max-w-[60vw]
-              lg:max-w-[50vw]
-            "
-            initial={{ scale: 0.96, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
-          />
-        </motion.div>
+      {/* TOP: Logo fixed to the top center */}
+      <motion.div
+        initial={{ opacity: 0, y: -15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="
+  pointer-events-none
+  absolute z-10 left-1/2 -translate-x-1/2
+  top-0 sm:top-1 md:top-2 lg:top-3
+  px-2
+"
+      >
+        <motion.img
+          src="/sena-logo2.png"
+          alt="Sena Şener"
+          className="
+            max-w-[80vw]
+            md:max-w-[60vw]
+            lg:max-w-[50vw]
+            
+          "
+          initial={{ scale: 0.96, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+        />
+      </motion.div>
 
-        {/* Subtitle – weniger Abstand, kann optisch „ranrutschen“ */}
+      {/* BOTTOM: Text and buttons near the bottom, leaving the middle open */}
+      <div
+        className="
+          absolute z-10 left-0 right-0
+          bottom-28 sm:bottom-24 md:bottom-24 lg:bottom-24
+          mx-auto max-w-6xl px-4 md:px-6 text-center
+        "
+      >
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.15 }}
-          className="mt-1 text-lg md:text-xl text-zinc-200 max-w-2xl mx-auto font-light tracking-wide"
+          className="text-lg md:text-xl text-zinc-200 max-w-2xl mx-auto font-light tracking-wide"
         >
           {t.subtitle}
         </motion.p>
 
-        {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.25 }}
-          className="mt-10 flex items-center justify-center gap-4"
+          className="mt-8 flex items-center justify-center gap-4"
         >
           <Button
             href="#tour"
