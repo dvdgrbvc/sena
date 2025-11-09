@@ -13,6 +13,7 @@ import ContactSection from '../components/ContactSection'
 import Footer from '../components/Footer'
 import ImageStripe from '../components/ImageStripe'
 import StreamSection from '../components/StreamSection'
+import GallerySection from '../components/GallerySection'
 
 export default function Page() {
   const [lang, setLang] = useState('en')
@@ -34,6 +35,7 @@ export default function Page() {
       <TourSection lang={lang} />
       <SocialSection lang={lang} />
       <ContactSection lang={lang} />
+      <GallerySection />
       <Footer />
     </main>
   )

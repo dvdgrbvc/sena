@@ -3,13 +3,13 @@
 import { motion } from 'framer-motion'
 import SectionHeader from './SectionHeader'
 
-const images = Array.from({ length: 9 }, (_, i) => `/gallery/${i + 1}.jpg`)
+const images = Array.from({ length: 15 }, (_, i) => `/gallery/${i + 1}.jpg`)
 
 export default function GallerySection() {
   return (
     <section
       id="gallery"
-      className="scroll-mt-24 mx-auto max-w-7xl px-4 md:px-6 py-16 md:py-24"
+      className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24"
     >
       <SectionHeader
         title="Gallery"
