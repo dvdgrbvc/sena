@@ -81,7 +81,10 @@ function InstagramProfileEmbed({ profileUrl = 'https://www.instagram.com/sena.se
 export default function SocialSection({ lang }) {
   const t = i18n[lang].social
   return (
-    <section id="social" className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24">
+    <section
+  id="social"
+  className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 pt-16 pb-8 md:pt-24 md:pb-12"
+>
       <SectionHeader title={t.title} subtitle={t.subtitle} />
       <div className="grid gap-6 md:grid-cols-2">
         <InstagramProfileEmbed profileUrl="https://www.instagram.com/sena.sener/" />

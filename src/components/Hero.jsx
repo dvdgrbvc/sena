@@ -34,7 +34,7 @@ export default function Hero({ lang }) {
         className="
   pointer-events-none
   absolute z-10 left-1/2 -translate-x-1/2
-  top-0 sm:top-1 md:top-2 lg:top-3
+  top-10 sm:top-1 md:top-2 lg:top-3
   px-2
 "
       >

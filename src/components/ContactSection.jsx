@@ -6,21 +6,23 @@ import { i18n } from '../app/i18n'
 
 export default function ContactSection({ lang }) {
   const t = i18n[lang].contact
+
   return (
-    <section
-      id="contact"
-      className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24"
-    >
+   <section
+  id="contact"
+  className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 pt-2 pb-16 md:pt-4 md:pb-20"
+>
       <SectionHeader
         title={t.title}
         id="contact-header"
         subtitle={t.subtitle}
       />
 
+      {/* CONTACT CARD – ASLI EREN */}
       <article
         className="relative overflow-hidden rounded-3xl border border-white/10
                    bg-gradient-to-br from-white/[.06] to-white/[.03]
-                   p-6 md:p-10"
+                   p-6 md:p-10 mt-10"
         aria-label="Professional contact card"
       >
         <div
@@ -36,6 +38,7 @@ export default function ContactSection({ lang }) {
         />
 
         <div className="grid grid-cols-1 md:grid-cols-[auto,1fr,auto] items-start gap-6 md:gap-10 relative">
+          {/* IMAGE */}
           <div className="shrink-0">
             <img
               src="/asli-eren.jpg"
@@ -45,18 +48,20 @@ export default function ContactSection({ lang }) {
             />
           </div>
 
+          {/* TEXT */}
           <div>
             <h3 className="text-white font-semibold text-xl md:text-2xl">
-              Aslı Eren — Brands & Media
+              {t.collabTitle}
             </h3>
+
+            {/* Rolle kannst du fix lassen oder ins i18n packen */}
             <p className="text-zinc-300 mt-1">Manager</p>
 
             <p className="text-zinc-300 mt-3 leading-relaxed">
-              For inquiries regarding collaborations, bookings, media appearances,
-              interviews, sponsorships, partnerships or press requests for{' '}
-              <span className="text-white font-medium">Sena Şener</span>.
+              {t.collabLine}
             </p>
 
+            {/* Kontakt */}
             <div className="mt-4 grid gap-1 text-purple-300">
               <a
                 className="hover:underline break-all"
@@ -70,6 +75,7 @@ export default function ContactSection({ lang }) {
             </div>
           </div>
 
+          {/* BUTTONS */}
           <div className="flex gap-2 self-start">
             <Button
               href="mailto:management@senasener.com"
