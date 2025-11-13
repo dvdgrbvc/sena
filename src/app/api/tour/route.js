@@ -38,15 +38,15 @@ export async function GET() {
     const rows = parseCsv(csv)
 
     const shows = rows
-      .filter((r) => r.date) // nur Zeilen mit Datum
-      .map((r) => ({
-        date: r.date,            // z. B. 2025-11-15
-        city: r.city,
-        venue: r.venue,
-        bubilet: r.bubilet,
-        bublix: r.bublix,
-        status: (r.sale || 'onsale').toLowerCase(), // new / onsale / soldout
-      }))
+  .filter((r) => r.date)
+  .map((r) => ({
+    date: r.date,
+    city: r.city,
+    venue: r.venue,
+    bubilet: r.bubilet,
+    biletix: r.biletix,        // ✅ neue Spalte
+    status: (r.sale || 'onsale').toLowerCase(),
+  }))
 
     return NextResponse.json({ shows })
   } catch (e) {

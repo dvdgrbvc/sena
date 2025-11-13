@@ -82,7 +82,7 @@ export default function TourSection({ lang }) {
 
     const links = [
       show.bubilet && { label: 'Bubilet', url: show.bubilet },
-      show.bublix && { label: 'Bublix', url: show.bublix },
+      show.biletix && { label: 'Biletix', url: show.biletix },
     ].filter(Boolean)
 
     if (links.length === 0) return
@@ -174,7 +174,7 @@ export default function TourSection({ lang }) {
         </>
       )}
 
-      {/* Modal: Auswahl zwischen Bubilet / Bublix */}
+      {/* Modal: Auswahl zwischen Bubilet / Biletix */}
       {modalShow && (
         <div
           className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center px-4"
@@ -200,13 +200,13 @@ export default function TourSection({ lang }) {
                   Bubilet
                 </Button>
               )}
-              {modalShow.bublix && (
+              {modalShow.biletix && (
                 <Button
-                  href={modalShow.bublix}
-                  ariaLabel="Go to Bublix"
+                  href={modalShow.biletix}
+                  ariaLabel="Go to Biletix"
                   variant="ghost"
                 >
-                  Bublix
+                  Biletix
                 </Button>
               )}
             </div>
