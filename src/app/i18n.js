@@ -16,7 +16,7 @@ export const i18n = {
       titleTop: "SENA",
       titleBottom: "ŞENER",
       subtitle:
-        "Turkish singer–songwriter. Dark, airy, emotional. New music and shows below.",
+        "Turkish singer–songwriter. Dark, deep, emotional. New music and shows below.",
       ctaPrimary: "Get Tickets",
       ctaSecondary: "Listen on Spotify"
     },
@@ -78,7 +78,7 @@ export const i18n = {
       titleTop: "SENA",
       titleBottom: "ŞENER",
       subtitle:
-        "Türk söz yazarı ve şarkıcı. Karanlık, ferah, duygusal. Yeni müzikler ve konserler aşağıda.",
+        "Türk söz yazarı ve şarkıcı. Karanlık, derin, duygusal. Yeni müzikler ve konserler aşağıda.",
       ctaPrimary: "Bilet Al",
       ctaSecondary: "Spotify'da Dinle"
     },
@@ -121,7 +121,7 @@ export const i18n = {
       collabTitle: "Aslı Eren — Marka & Medya",
       collabLine:
         "Sena Şener için marka işbirlikleri, medya talepleri ve basın iletişimi.",
-      bookingTitle: "Müge Sözen — Rezervasyon",
+      bookingTitle: "Aslı Eren — Rezervasyon",
       bookingLine: "Konser rezervasyonları ve canlı performans talepleri."
     }
   }
