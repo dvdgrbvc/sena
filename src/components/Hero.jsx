@@ -1,6 +1,7 @@
 // app/components/Hero.jsx
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import Button from './Button'
 import { i18n } from '../app/i18n'
 
@@ -20,40 +21,41 @@ export default function Hero({ lang }) {
         playsInline
         muted
         loop
-        poster="/hero-poster.jpg"
         preload="metadata"
       />
+
       <div className="absolute inset-0 bg-black/50" />
       <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_50%,rgba(168,85,247,0.18),rgba(0,0,0,0))]" />
 
-      {/* TOP: Logo fixed to the top center */}
+      {/* TOP: Logo */}
       <motion.div
         initial={{ opacity: 0, y: -15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="
-  pointer-events-none
-  absolute z-10 left-1/2 -translate-x-1/2
-  top-10 sm:top-1 md:top-2 lg:top-3
-  px-2
-"
+          pointer-events-none
+          absolute z-10 left-1/2 -translate-x-1/2
+          top-10 sm:top-1 md:top-2 lg:top-3
+          px-2
+        "
       >
-        <motion.img
-          src="/sena-logo2.png"
+        <Image
+          src="/sena-logo2.webp"    // gleiche Grafik, nur als WebP gespeichert
           alt="Sena Şener"
+          width={885}               // hier die echte Pixelgröße aus der Datei eintragen
+          height={375}
+          priority
+          fetchPriority="high"
+          sizes="(max-width: 768px) 80vw, (max-width: 1024px) 60vw, 50vw"
           className="
             max-w-[80vw]
             md:max-w-[60vw]
             lg:max-w-[50vw]
-            
           "
-          initial={{ scale: 0.96, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
         />
       </motion.div>
 
-      {/* BOTTOM: Text and buttons near the bottom, leaving the middle open */}
+      {/* BOTTOM: Text und Buttons */}
       <div
         className="
           absolute z-10 left-0 right-0
@@ -101,7 +103,6 @@ export default function Hero({ lang }) {
         transition={{ duration: 7, repeat: Infinity }}
       />
 
-      {/* Gradient fade bottom */}
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-black to-transparent" />
     </section>
   )

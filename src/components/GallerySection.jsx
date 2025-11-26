@@ -4,10 +4,15 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import SectionHeader from './SectionHeader'
+import { i18n } from '../app/i18n'
 
+// Tipp: Wenn du die Bilder in WebP konvertierst, einfach Endung hier ändern:
 const images = Array.from({ length: 15 }, (_, i) => `/gallery/${i + 1}.jpg`)
+// z. B.: `/gallery/${i + 1}.webp`
 
-export default function GallerySection() {
+export default function GallerySection({ lang = 'en' }) {
+  const t = i18n[lang].gallery
+
   const [isOpen, setIsOpen] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
 
@@ -48,41 +53,33 @@ export default function GallerySection() {
       className="scroll-mt-24 mx-auto max-w-6xl px-4 md:px-6 py-16 md:py-24"
     >
       <SectionHeader
-        title="Gallery"
-        subtitle="Moments on stage & behind the scenes"
+        title={t.title}
+        subtitle={t.subtitle}
       />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
         {images.map((src, i) => (
-          <motion.button
+          <button
             key={src}
             type="button"
             onClick={() => openModal(i)}
-            initial={{ opacity: 0, scale: 0.96 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: '-40px' }}
-            transition={{ duration: 0.45, delay: i * 0.03 }}
             className="relative overflow-hidden rounded-2xl group aspect-[4/5] md:aspect-square focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/70"
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.5 }}
-              className="relative w-full h-full"
-            >
+            <div className="relative w-full h-full transition-transform duration-300 group-hover:scale-105">
               <Image
                 src={src}
                 alt={`Gallery ${i + 1}`}
                 fill
                 className="object-cover"
                 sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                priority={i < 3}
+                loading="lazy"
                 placeholder="blur"
                 blurDataURL="/placeholder.jpg"
               />
-            </motion.div>
+            </div>
 
             <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300" />
-          </motion.button>
+          </button>
         ))}
       </div>
 
@@ -121,7 +118,7 @@ export default function GallerySection() {
                   fill
                   className="object-contain"
                   sizes="(max-width: 768px) 100vw, 60vw"
-                  priority
+                  loading="lazy"
                 />
               </div>
             </div>

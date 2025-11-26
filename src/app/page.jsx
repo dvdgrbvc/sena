@@ -30,12 +30,12 @@ export default function Page() {
       <Hero lang={lang} />
       <MilestoneCelebration lang={lang} />
       <ImageStripe />
-      <StreamSection />
+      <StreamSection lang={lang} />
       <SpotifySection lang={lang} />
       <TourSection lang={lang} />
       <SocialSection lang={lang} />
       <ContactSection lang={lang} />
-      <GallerySection />
+     <GallerySection lang={lang} />
       <Footer />
     </main>
   )

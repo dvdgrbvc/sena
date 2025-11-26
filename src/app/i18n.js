@@ -60,6 +60,19 @@ export const i18n = {
         "Brand collaborations, media inquiries and press requests for Sena Şener.",
       bookingTitle: "Müge Sözen — Bookings",
       bookingLine: "Concert bookings and live performance inquiries."
+    },
+
+    gallery: {
+      title: "Gallery",
+      subtitle: "Moments on stage & behind the scenes."
+    },
+
+    streams: {
+      title: "Streams",
+      subtitle: "Lifetime streams across platforms.",
+      spotifyLabel: "Spotify",
+      youtubeLabel: "YouTube",
+      streamsLabel: "Streams"
     }
   },
 
@@ -123,6 +136,19 @@ export const i18n = {
         "Sena Şener için marka işbirlikleri, medya talepleri ve basın iletişimi.",
       bookingTitle: "Aslı Eren — Rezervasyon",
       bookingLine: "Konser rezervasyonları ve canlı performans talepleri."
+    },
+
+    gallery: {
+      title: "Galeri",
+      subtitle: "Sahneden ve kamera arkasından anlar."
+    },
+
+    streams: {
+      title: "Dinlenmeler",
+      subtitle: "Tüm platformlardaki toplam dinlenmeler.",
+      spotifyLabel: "Spotify",
+      youtubeLabel: "YouTube",
+      streamsLabel: "Dinlenme"
     }
   }
 }

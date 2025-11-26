@@ -95,7 +95,7 @@ function AppleMusicEmbed() {
           borderRadius: 10,
         }}
         sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-        src="https://embed.music.apple.com/de/playlist/sena-%C5%9Fener-essentials/pl.3c2051b0a5c24924a95460b65bed8ea9"
+        src="https://embed.music.apple.com/us/playlist/sena-%C5%9Fener-essentials/pl.3c2051b0a5c24924a95460b65bed8ea9"
         title="Apple Music — Sena Şener Essentials"
         loading="lazy"
       />

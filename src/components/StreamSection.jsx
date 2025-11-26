@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useReducedMotion, motion, useInView } from 'framer-motion'
 import SectionHeader from './SectionHeader'
+import { i18n } from '../app/i18n'
 
 function useCountUp(target = 0, { duration = 1400, play = false } = {}) {
   const prefersReducedMotion = useReducedMotion()
@@ -10,7 +11,10 @@ function useCountUp(target = 0, { duration = 1400, play = false } = {}) {
 
   useEffect(() => {
     if (!play) return
-    if (prefersReducedMotion) { setValue(target); return }
+    if (prefersReducedMotion) {
+      setValue(target)
+      return
+    }
 
     let raf = 0
     const start = performance.now()
@@ -19,8 +23,7 @@ function useCountUp(target = 0, { duration = 1400, play = false } = {}) {
 
     const tick = (now) => {
       const t = Math.min(1, (now - start) / duration)
-      // easeOutCubic
-      const eased = 1 - Math.pow(1 - t, 3)
+      const eased = 1 - Math.pow(1 - t, 3) // easeOutCubic
       setValue(Math.floor(startVal + diff * eased))
       if (t < 1) raf = requestAnimationFrame(tick)
     }
@@ -34,7 +37,9 @@ function useCountUp(target = 0, { duration = 1400, play = false } = {}) {
 
 const formatInt = (n) => new Intl.NumberFormat().format(n)
 
-export default function StreamsSection() {
+export default function StreamsSection({ lang }) {
+  const t = i18n[lang].streams
+
   const spotifyTarget = 800_000_000
   const youtubeTarget = 600_000_000
 
@@ -43,7 +48,7 @@ export default function StreamsSection() {
   const inView = useInView(sectionRef, { once: true, margin: '-20% 0px' })
 
   const spotify = useCountUp(spotifyTarget, { duration: 3000, play: inView })
-  const youtube  = useCountUp(youtubeTarget,  { duration: 2400, play: inView })
+  const youtube = useCountUp(youtubeTarget, { duration: 2400, play: inView })
 
   return (
     <section
@@ -53,8 +58,8 @@ export default function StreamsSection() {
     >
       <SectionHeader
         id="streams-header"
-        title="Streams"
-        subtitle="Lifetime streams across platforms"
+        title={t.title}
+        subtitle={t.subtitle}
       />
 
       <div className="grid gap-6 md:gap-8 md:grid-cols-2">
@@ -69,20 +74,24 @@ export default function StreamsSection() {
           <div className="shrink-0">
             <img
               src="/spotify.png"
-              alt="Spotify"
+              alt={t.spotifyLabel}
               className="h-12 w-12 md:h-14 md:w-14 object-contain"
               loading="lazy"
             />
           </div>
           <div>
-            <p className="text-sm uppercase tracking-wider text-zinc-400">Spotify</p>
+            <p className="text-sm uppercase tracking-wider text-zinc-400">
+              {t.spotifyLabel}
+            </p>
             <div className="flex items-end gap-2">
               <span className="text-3xl md:text-4xl font-extrabold text-white tabular-nums">
                 {formatInt(spotify)}
               </span>
-              <span className="text-xl md:text-2xl text-zinc-300 font-semibold">+</span>
+              <span className="text-xl md:text-2xl text-zinc-300 font-semibold">
+                +
+              </span>
             </div>
-            <p className="text-zinc-400 text-sm mt-1">Streams</p>
+            <p className="text-zinc-400 text-sm mt-1">{t.streamsLabel}</p>
           </div>
         </motion.article>
 
@@ -97,20 +106,24 @@ export default function StreamsSection() {
           <div className="shrink-0">
             <img
               src="/youtube.png"
-              alt="YouTube"
+              alt={t.youtubeLabel}
               className="h-12 w-12 md:h-14 md:w-14 object-contain"
               loading="lazy"
             />
           </div>
           <div>
-            <p className="text-sm uppercase tracking-wider text-zinc-400">YouTube</p>
+            <p className="text-sm uppercase tracking-wider text-zinc-400">
+              {t.youtubeLabel}
+            </p>
             <div className="flex items-end gap-2">
               <span className="text-3xl md:text-4xl font-extrabold text-white tabular-nums">
                 {formatInt(youtube)}
               </span>
-              <span className="text-xl md:text-2xl text-zinc-300 font-semibold">+</span>
+              <span className="text-xl md:text-2xl text-zinc-300 font-semibold">
+                +
+              </span>
             </div>
-            <p className="text-zinc-400 text-sm mt-1">Streams</p>
+            <p className="text-zinc-400 text-sm mt-1">{t.streamsLabel}</p>
           </div>
         </motion.article>
       </div>
