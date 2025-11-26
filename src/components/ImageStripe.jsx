@@ -5,7 +5,7 @@ export default function ImageStripe() {
     <section aria-label="Image divider" className="relative">
       <div className="relative h-70 md:h-96 w-screen left-1/2 -translate-x-1/2 overflow-hidden">
         <img
-          src="/sena-divider.jpg"
+          src="/sena-divider.webp"
           alt="Sena Şener"
           loading="lazy"
           className="absolute inset-0 w-full h-full object-cover object-[center_80%]"

@@ -73,7 +73,7 @@ export default function StreamsSection({ lang }) {
         >
           <div className="shrink-0">
             <img
-              src="/spotify.png"
+              src="/spotify.webp"
               alt={t.spotifyLabel}
               className="h-12 w-12 md:h-14 md:w-14 object-contain"
               loading="lazy"
@@ -105,7 +105,7 @@ export default function StreamsSection({ lang }) {
         >
           <div className="shrink-0">
             <img
-              src="/youtube.png"
+              src="/youtube.webp"
               alt={t.youtubeLabel}
               className="h-12 w-12 md:h-14 md:w-14 object-contain"
               loading="lazy"

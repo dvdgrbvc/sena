@@ -28,7 +28,7 @@ export default function ContactSection({ lang }) {
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
-            backgroundImage: "url('/spirale.png')",
+            backgroundImage: "url('/spirale.webp')",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "right 1.5rem top 1.5rem",
             backgroundSize: "30%",
