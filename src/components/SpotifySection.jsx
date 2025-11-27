@@ -1,4 +1,4 @@
-'use client'
+// app/components/SpotifySection.jsx
 
 import { useRef, useState } from 'react'
 import { motion } from 'framer-motion'
@@ -7,7 +7,6 @@ import { i18n } from '../app/i18n'
 
 export default function SpotifySection({ lang }) {
   const t = i18n[lang]
-
   return (
     <section
       id="music"
@@ -36,10 +35,8 @@ export default function SpotifySection({ lang }) {
           className="block mt-6"
         >
           <img
-            src="/sena-youtube.webp"
+            src="/sena-youtube.png"
             alt="Sena Şener — Watch on YouTube"
-            width={1280}
-            height={720}
             loading="lazy"
             className="mx-auto w-full max-w-4xl rounded-2xl border border-white/10 shadow-2xl shadow-black/40"
             style={{ display: 'block' }}
@@ -128,12 +125,11 @@ function YouTubeGallery({ videos }) {
           /(\d+)/.exec(String(t))
         if (sec) {
           const [, h, m, s] = sec
-          start =
-            h || m || s
-              ? parseInt(h || '0') * 3600 +
-                parseInt(m || '0') * 60 +
-                parseInt(s || '0')
-              : parseInt(sec[0], 10)
+          start = h || m || s
+            ? parseInt(h || '0') * 3600 +
+              parseInt(m || '0') * 60 +
+              parseInt(s || '0')
+            : parseInt(sec[0], 10)
         }
       }
       return { id, start }
@@ -209,7 +205,6 @@ function YouTubeGallery({ videos }) {
               className="h-full w-full"
               src={`https://www.youtube.com/embed/${active.id}?rel=0&start=${active.start}`}
               title={active.label || 'YouTube video'}
-              loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
             />
@@ -234,13 +229,13 @@ function YouTubeGallery({ videos }) {
         </button>
       </div>
 
-      <div className="flex items-center justify-center gap-2 pb-4 pt-3">
+      <div className="flex items-center justify-center gap-1 pb-4 pt-3">
         {items.map((_, i) => (
           <button
             key={i}
             aria-label={`Go to ${i + 1}`}
             onClick={() => setIndex(i)}
-            className={`h-3 w-6 rounded-full ${
+            className={`h-1.5 w-4 rounded-full ${
               i === index ? 'bg-purple-500' : 'bg-white/20'
             }`}
           />
@@ -267,10 +262,8 @@ function SidePreview({ side = 'left', item, onClick, style }) {
     >
       <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-xl shadow-black/40">
         <img
-          src={`https://img.youtube.com/vi/${item.id}/mqdefault.jpg`}
+          src={`https://img.youtube.com/vi/${item.id}/hqdefault.jpg`}
           alt={item.label || 'thumbnail'}
-          width={320}
-          height={180}
           className="h-full w-full object-cover"
           loading="lazy"
           style={{ filter: 'brightness(0.9)' }}
